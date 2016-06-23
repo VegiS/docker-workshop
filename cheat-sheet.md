@@ -53,4 +53,25 @@
 
 ## Dynamically add a container in a network
 
-`docker network connect --alias redis demo redis`
+`docker network connect --alias=redis demo redis`
+
+## Create a volume
+
+`docker create volume myvol`
+
+## Mount a volume to a container
+
+`docker run -v=myvol:/mnt/data ubuntu echo hello > /mnt/data/hey.txt`
+`docker run -v=myvol:/mnt/data ubuntu cat /mnt/data/hey.txt`
+
+## Mount all volumes from another container
+
+`docker run --volumes-from=some-container -it ubuntu bash`
+
+## Run a Docker Compose stack
+
+`docker-compose up -d`
+
+## Run another command inside a running container
+
+`docker-compose exec django ./manage.py migrate`

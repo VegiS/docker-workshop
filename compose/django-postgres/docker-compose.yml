@@ -1,0 +1,25 @@
+version: '2'
+services:
+  django:
+    build: .
+    environment:
+      DATABASE_URL: "postgres://postgres:mysecretpassword@postgres/seneca"
+    networks:
+      seneca-net:
+        aliases:
+          - django
+    ports:
+      - "8000:8000"
+    command: ./check_n_run.sh ./manage.py runserver 0.0.0.0:8000
+  postgres:
+    image: "postgres:9.5"
+    environment:
+      POSTGRES_DB: seneca
+      POSTGRES_PASSWORD: mysecretpassword
+    networks:
+      seneca-net:
+        aliases:
+          - postgres
+
+networks:
+  seneca-net:
